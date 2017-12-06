@@ -1,0 +1,16 @@
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\bin\Debug\Course_work.exe.config
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\bin\Debug\Course_work.exe
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\bin\Debug\Course_work.pdb
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Course_work.csprojResolveAssemblyReference.cache
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\MainWindow.g.cs
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\App.g.cs
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Course_work_MarkupCompile.cache
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Course_work_MarkupCompile.lref
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\MainWindow.baml
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Course_work.g.resources
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Course_work.Properties.Resources.resources
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Course_work.csproj.GenerateResource.Cache
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Course_work.exe
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Course_work.pdb
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Registration.g.cs
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Registration.baml
