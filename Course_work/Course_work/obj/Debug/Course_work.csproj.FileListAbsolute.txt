@@ -14,3 +14,7 @@ E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Cours
 E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Course_work.pdb
 E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Registration.g.cs
 E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Registration.baml
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Admin_window.g.cs
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\User_window.g.cs
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Admin_window.baml
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\User_window.baml

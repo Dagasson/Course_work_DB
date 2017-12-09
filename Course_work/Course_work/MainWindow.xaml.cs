@@ -26,38 +26,62 @@ namespace Course_work
             InitializeComponent();
         }
 
-        private void selUs()
+        private void Authorization()
         {
-           string q1 =login.Text;
-                q1 = new String(login.Text.Where(c => Char.IsDigit(c)).ToArray());//хуитка для считывания айдишника с поля
-
-            // SqlConnectionStringBuilder ConnectionString = new SqlConnectionStringBuilder();//данные о подключении, или гайд, как подключиться к БД, если ты безрукая хуйня.
-            //ConnectionString.DataSource = @"ASHENVALE";
-            //ConnectionString.InitialCatalog = "Course_work";
-            //ConnectionString.IntegratedSecurity = true;
-            //ConnectionString.Pooling = true;
-            //SqlConnection connection = new SqlConnection(ConnectionString.ConnectionString);//создаем подключение
-
-           // string defaultString = "Data Source = ASHENVALE; Initial Catalog = Course_work; Integrated Security = true;";//Подключение здорового человека.
-            SqlConnection connection = new SqlConnection(Connect_data.adminConnect);
-
-            SqlCommand command = new SqlCommand("usp_UsersSelect", connection);//указываем какую команду вызываем
-            command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
-            connection.Open();//открываем соединение
-            //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
-            //добавляем параметр в вызываемую процедуру
-            command.Parameters.AddWithValue("@id", q1);
-            
-            SqlDataReader result = command.ExecuteReader();//выполняем процедуру, попутно записывая результат
-        
-            if (result.Read())//если прочитало- выведет логин по айдишнику
+            if (login.Text.Length == 0)
             {
-                String q2 = result["Login"].ToString();
-                MessageBox.Show("Login: "+ q2);
-               // Close();//закрывает окно
+                MessageBox.Show("Введите логин.");
+                login.Focus();
             }
-            connection.Close();
-            
+            else if (password.Text.Length == 0)
+            {
+                MessageBox.Show("Введите пароль");
+                password.Focus();
+            }
+            else
+            {
+                string Login = login.Text;
+                string Password = password.Text;
+                //q1 = new String(login.Text.Where(c => Char.IsDigit(c)).ToArray());//хуитка для проверки число ли введено, тут не нужно
+
+                // SqlConnectionStringBuilder ConnectionString = new SqlConnectionStringBuilder();//данные о подключении, или гайд, как подключиться к БД, если ты безрукая хуйня.
+                //ConnectionString.DataSource = @"ASHENVALE";
+                //ConnectionString.InitialCatalog = "Course_work";
+                //ConnectionString.IntegratedSecurity = true;
+                //ConnectionString.Pooling = true;
+                //SqlConnection connection = new SqlConnection(ConnectionString.ConnectionString);//создаем подключение
+
+                SqlConnection connection = new SqlConnection(Connect_data.defaultConnect);
+
+                SqlCommand command = new SqlCommand("usp_UserSelectByLogin", connection);//указываем какую команду вызываем
+                command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
+                connection.Open();//открываем соединение
+                                  //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
+                                  //добавляем параметр в вызываемую процедуру
+                command.Parameters.AddWithValue("@Login", Login);
+                command.Parameters.AddWithValue("@Password", Password);
+
+                SqlDataReader result = command.ExecuteReader();//выполняем процедуру, попутно записывая результат
+
+                if (result.Read())//если прочитало- выведет логин по айдишнику
+                {
+                    string adm = result["isAdmin"].ToString();
+                    if (adm == "1") Connect_data.currentConnect = Connect_data.userConnect;
+                    else if (adm == "2") Connect_data.currentConnect = Connect_data.adminConnect;
+
+                    User_Model.Login = Login;
+                    User_Model.isAdmin = int.Parse(result["isAdmin"].ToString());//Это ж надо было ещё такую дичь придумать. Парсить в стринг, потом в инт, больной ублюдок.
+                    User_Model.Balance = double.Parse(result["Balance"].ToString());
+                    User_Model.id = int.Parse(result["id"].ToString());
+
+                    // Close();//закрывает окно
+                }
+                connection.Close();
+                User_window us_w = new User_window();
+                us_w.Show();
+                Close();
+
+            }
         }
 
 
@@ -66,7 +90,7 @@ namespace Course_work
            
             try
             {        
-               selUs();
+               Authorization();
 
             }
             catch (SqlException ex)
@@ -75,7 +99,7 @@ namespace Course_work
             }
             finally
             {
-               // MessageBox.Show("Подключение закрыто...");
+                MessageBox.Show("Подключение закрыто...");
             }
 
             Console.Read();

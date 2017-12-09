@@ -31,8 +31,8 @@ namespace Course_work
             {
                 string Login = login.Text;
                 string Password = password.Text;
-                int Balance = 0;
-                int isAdmin = 0;
+                double Balance = 0;
+                int isAdmin = 1;
                 SqlConnection connection = new SqlConnection(Connect_data.defaultConnect);
 
                 SqlCommand command = new SqlCommand("usp_UsersInsert", connection);
