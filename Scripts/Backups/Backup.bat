@@ -1,0 +1,1 @@
+sqlcmd -S Ashenvale -E -i Backup.sql

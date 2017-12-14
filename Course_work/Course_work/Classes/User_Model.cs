@@ -10,7 +10,7 @@ namespace Course_work
     {
         static public string Login;
         static public string Password;
-        static public double Balance;
+        static public int idOfCards;
         static public int id;
         static public int isAdmin;
     }

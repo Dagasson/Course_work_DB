@@ -31,26 +31,29 @@ namespace Course_work
             {
                 string Login = login.Text;
                 string Password = password.Text;
-                double Balance = 0;
+                int NumOfCards;
                 int isAdmin = 1;
-                SqlConnection connection = new SqlConnection(Connect_data.defaultConnect);
+                if (Int32.TryParse(numOfCard.Text, out NumOfCards))
+                {
+                    SqlConnection connection = new SqlConnection(Connect_data.defaultConnect);
 
-                SqlCommand command = new SqlCommand("usp_UsersInsert", connection);
-                command.CommandType = System.Data.CommandType.StoredProcedure;
+                    SqlCommand command = new SqlCommand("usp_UsersInsert", connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                connection.Open();
-                
-                command.Parameters.AddWithValue("@Login", Login);
-                command.Parameters.AddWithValue("@Password", Password);
-                command.Parameters.AddWithValue("@Balance", Balance);
-                command.Parameters.AddWithValue("@isAdmin", isAdmin);
+                    connection.Open();
 
-                SqlDataReader result = command.ExecuteReader();
-                connection.Close();
-                MessageBox.Show("Регистрация прошла успешно.");
-                Close();
+                    command.Parameters.AddWithValue("@Login", Login);
+                    command.Parameters.AddWithValue("@Password", Password);
+                    command.Parameters.AddWithValue("@idOfCards", NumOfCards);
+                    command.Parameters.AddWithValue("@isAdmin", isAdmin);
+
+                    SqlDataReader result = command.ExecuteReader();
+                    connection.Close();
+                    MessageBox.Show("Регистрация прошла успешно.");
+                    Close();
+                }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 MessageBox.Show(ex.Message);
             }

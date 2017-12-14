@@ -58,10 +58,17 @@
     <Compile Include="Admin_window.xaml.cs">
       <DependentUpon>Admin_window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\AllUser_Model.cs" />
+    <Compile Include="Classes\Delivery_Model.cs" />
+    <Compile Include="Classes\getProduct_Model.cs" />
     <Compile Include="Classes\Order_Model.cs" />
     <Compile Include="Classes\productOnOrders_Model.cs" />
+    <Compile Include="Classes\Shipper_Model.cs" />
     <Compile Include="Classes\Shop_Model.cs" />
     <Compile Include="Classes\User_Model.cs" />
+    <Compile Include="Create_orders.xaml.cs">
+      <DependentUpon>Create_orders.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
@@ -69,6 +76,10 @@
       <DependentUpon>User_window.xaml</DependentUpon>
     </Compile>
     <Page Include="Admin_window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Create_orders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

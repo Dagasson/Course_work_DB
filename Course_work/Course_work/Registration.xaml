@@ -9,7 +9,8 @@
     <Grid>
         <TextBox x:Name="login" HorizontalAlignment="Left" Height="23" Margin="80,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" TextChanged="login_TextChanged"/>
         <TextBox x:Name="password" HorizontalAlignment="Left" Height="23" Margin="80,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" TextChanged="password_TextChanged"/>
-        <Button x:Name="registry" Content="Зарегистрировать" HorizontalAlignment="Left" Margin="80,165,0,0" VerticalAlignment="Top" Width="160" Click="registry_Click"/>
+        <Button x:Name="registry" Content="Зарегистрировать" HorizontalAlignment="Left" Margin="80,198,0,0" VerticalAlignment="Top" Width="160" Click="registry_Click"/>
+        <TextBox x:Name="numOfCard" HorizontalAlignment="Left" Height="23" Margin="80,152,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160"/>
 
     </Grid>
 </Window>

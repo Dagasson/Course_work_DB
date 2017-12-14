@@ -5,9 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Course_work"
         mc:Ignorable="d"
-        Title="Admin_window" Height="300" Width="409">
-    <Grid>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="95" Height="30"/>
+        Title="Admin_window" Height="351" Width="544">
+    <Grid Margin="0,0,-8,0" HorizontalAlignment="Left" Width="409">
+
+        <Button x:Name="Generate" Content="Generate" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="130" Height="20" Click="Generate_Click"/>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="276" Margin="10,35,-121,0" VerticalAlignment="Top" Width="520">
+            <TabItem Header="Shop">
+                <Grid Background="#FFE5E5E5" Margin="0,1,0,-1">
+                    <DataGrid x:Name="Shop_List" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="201" Width="346" SelectionChanged="dataGrid2_SelectionChanged"/>
+                    <TextBlock x:Name="textCategory" HorizontalAlignment="Left" Margin="361,0,0,0" TextWrapping="Wrap" Text="Категория" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textNameShop" HorizontalAlignment="Left" Margin="361,43,0,0" TextWrapping="Wrap" Text="Наименование" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textCostShop" HorizontalAlignment="Left" Margin="361,92,0,0" TextWrapping="Wrap" Text="Стоимость" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textInfoShop" HorizontalAlignment="Left" Margin="361,141,0,0" TextWrapping="Wrap" Text="Информация о продукте" VerticalAlignment="Top"/>
+                    <TextBox x:Name="CategoryShop" HorizontalAlignment="Left" Height="19" Margin="361,19,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+                    <TextBox x:Name="NameShop" HorizontalAlignment="Left" Height="23" Margin="361,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+                    <TextBox x:Name="CostShop" HorizontalAlignment="Left" Height="23" Margin="361,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+                    <TextBox x:Name="Info" HorizontalAlignment="Left" Height="23" Margin="361,162,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+                    <Button x:Name="AddToShop" Content="Добавить товар" HorizontalAlignment="Left" Margin="361,190,0,0" VerticalAlignment="Top" Width="111" Click="AddToShop_Click"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Delivery">
+                <Grid Background="#FFE5E5E5" Margin="0,5,0,-5">
+                    <Grid.ColumnDefinitions>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="Delivery_List" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="196" Width="359" SelectionChanged="dataGrid1_SelectionChanged" Grid.ColumnSpan="2"/>
+                    <TextBlock x:Name="textName" HorizontalAlignment="Left" Margin="374,0,0,0" TextWrapping="Wrap" Text="Наименование товара" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textDateOfIncoming" HorizontalAlignment="Left" Margin="374,43,0,0" TextWrapping="Wrap" Text="Дата прибытия" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textCost" HorizontalAlignment="Left" Margin="374,92,0,0" TextWrapping="Wrap" Text="Стоимость" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textAmount" HorizontalAlignment="Left" Margin="374,141,0,0" TextWrapping="Wrap" Text="Количество" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textIdOfShipper" HorizontalAlignment="Left" Margin="374,190,0,0" TextWrapping="Wrap" Text="Id поставщика" VerticalAlignment="Top"/>
+                    <TextBox x:Name="NameOfProduct" HorizontalAlignment="Left" Height="19" Margin="374,16,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+                    <TextBox x:Name="DateOfIncoming" HorizontalAlignment="Left" Height="23" Margin="374,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+                    <TextBox x:Name="CostOfProduct" HorizontalAlignment="Left" Height="23" Margin="374,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+                    <TextBox x:Name="AmountOfProduct" HorizontalAlignment="Left" Height="23" Margin="374,162,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+                    <TextBox x:Name="idOfShipper" HorizontalAlignment="Left" Height="23" Margin="374,211,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+                    <Button x:Name="AddDelivery" Content="Добавить поставку" Grid.Column="1" HorizontalAlignment="Left" Margin="235,211,0,0" VerticalAlignment="Top" Width="114" Click="AddDelivery_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Shipper">
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,-2">
+                    <Grid.ColumnDefinitions>
+
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="Shipper_List" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="226" Width="359" SelectionChanged="dataGrid_SelectionChanged" Grid.ColumnSpan="3"/>
+                    <TextBlock x:Name="textShippersName" HorizontalAlignment="Left" Margin="374,10,0,0" TextWrapping="Wrap" Text="Имя поставщика" VerticalAlignment="Top" Width="126"/>
+                    <TextBox x:Name="ShippersName" HorizontalAlignment="Left" Height="23" Margin="374,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="126"/>
+                    <TextBlock x:Name="textNumOfCard" HorizontalAlignment="Left" Margin="374,59,0,0" TextWrapping="Wrap" Text="Номер карты" VerticalAlignment="Top" Width="126"/>
+                    <TextBox x:Name="NumOfCard" HorizontalAlignment="Left" Height="23" Margin="374,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="126"/>
+                    <Button x:Name="addShipper" Content="Добавить поставщика" HorizontalAlignment="Left" Margin="374,108,0,0" VerticalAlignment="Top" Width="126" Click="addShipper_Click"/>
+                    <TextBlock x:Name="textShippersId" HorizontalAlignment="Left" Margin="374,148,0,0" TextWrapping="Wrap" Text="Удалить по id" VerticalAlignment="Top" Width="126"/>
+                    <TextBox x:Name="shippersId" HorizontalAlignment="Left" Height="23" Margin="374,169,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="126"/>
+                    <Button x:Name="delShipper" Content="Удалить поставщика" HorizontalAlignment="Left" Margin="374,197,0,0" VerticalAlignment="Top" Width="126" Click="delShipper_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Users">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="User_List" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="224" Width="359" SelectionChanged="dataGrid3_SelectionChanged"/>
+                    <TextBlock x:Name="textOfUsers" HorizontalAlignment="Left" Margin="374,10,0,0" TextWrapping="Wrap" Text="Id пользователя" VerticalAlignment="Top" Width="126"/>
+                    <TextBox x:Name="idOfUser" HorizontalAlignment="Left" Height="23" Margin="374,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="126"/>
+                    <Button x:Name="setAdmin" Content="Возвысить до админа" HorizontalAlignment="Left" Margin="374,59,0,0" VerticalAlignment="Top" Width="126" Click="setAdmin_Click"/>
+                    <Button x:Name="setUser" Content="Изгнать из админов" HorizontalAlignment="Left" Margin="375,86,0,0" VerticalAlignment="Top" Width="126" Click="setUser_Click"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button x:Name="Drop" Content="Delete" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Width="130" Click="Drop_Click"/>
 
     </Grid>
 </Window>

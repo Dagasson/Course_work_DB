@@ -65,20 +65,28 @@ namespace Course_work
 
                 if (result.Read())//если прочитало- выведет логин по айдишнику
                 {
-                    string adm = result["isAdmin"].ToString();
-                    if (adm == "1") Connect_data.currentConnect = Connect_data.userConnect;
-                    else if (adm == "2") Connect_data.currentConnect = Connect_data.adminConnect;
-
                     User_Model.Login = Login;
                     User_Model.isAdmin = int.Parse(result["isAdmin"].ToString());//Это ж надо было ещё такую дичь придумать. Парсить в стринг, потом в инт, больной ублюдок.
-                    User_Model.Balance = double.Parse(result["Balance"].ToString());
+                    User_Model.idOfCards = int.Parse(result["idOfCards"].ToString());
                     User_Model.id = int.Parse(result["id"].ToString());
+                    string adm = result["isAdmin"].ToString();
+                    if (adm == "1")
+                    {
+                        Connect_data.currentConnect = Connect_data.userConnect;
+                        User_window us_w = new User_window();
+                        us_w.Show();
+                    }
+                    else
+                    {
+                        if (adm == "2") Connect_data.currentConnect = Connect_data.adminConnect;
+                        Admin_window ad_w = new Admin_window();
+                        ad_w.Show();
+                    }
+                    
 
                     // Close();//закрывает окно
                 }
                 connection.Close();
-                User_window us_w = new User_window();
-                us_w.Show();
                 Close();
 
             }
@@ -99,7 +107,7 @@ namespace Course_work
             }
             finally
             {
-                MessageBox.Show("Подключение закрыто...");
+                //MessageBox.Show("Подключение закрыто...");
             }
 
             Console.Read();

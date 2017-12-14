@@ -18,3 +18,5 @@ E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Admin
 E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\User_window.g.cs
 E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Admin_window.baml
 E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\User_window.baml
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Create_orders.g.cs
+E:\Study\3-1\DB\Курсач\Course_work\Course_work\Course_work\obj\Debug\Create_orders.baml

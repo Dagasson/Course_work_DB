@@ -1,0 +1,19 @@
+﻿<Window x:Class="Course_work.Create_orders"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Course_work"
+        mc:Ignorable="d"
+        Title="Create_orders" Height="300" Width="489">
+    <Grid>
+        <DataGrid x:Name="onBasket" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Height="180" Width="461" ItemsSource="{DynamicResource ResourceKey=Classes.productOnOrders_Model}"/>
+        <TextBox x:Name="idOfProduct" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40"/>
+        <TextBox x:Name="how_much" HorizontalAlignment="Left" Height="23" Margin="55,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40"/>
+        <Button x:Name="Add_on_order" Content="Добавить в корзину" HorizontalAlignment="Left" Margin="100,31,0,0" VerticalAlignment="Top" Width="130" Click="Add_on_order_Click"/>
+        <Button x:Name="Place_order" Content="Оформить заказ" HorizontalAlignment="Left" Margin="350,243,0,0" VerticalAlignment="Top" Width="120" Click="Place_order_Click"/>
+        <TextBox x:Name="deletedId" HorizontalAlignment="Left" Height="23" Margin="280,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40"/>
+        <Button x:Name="deleteById" Content="Удалить из корзины" HorizontalAlignment="Left" Margin="325,31,0,0" VerticalAlignment="Top" Width="130" Click="button_Click"/>
+
+    </Grid>
+</Window>

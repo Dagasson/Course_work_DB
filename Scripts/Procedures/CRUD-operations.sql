@@ -20,6 +20,7 @@ AS
 
 	COMMIT
 GO
+
 IF OBJECT_ID('[dbo].[usp_DeliveryInsert]') IS NOT NULL
 BEGIN 
     DROP PROC [dbo].[usp_DeliveryInsert] 
@@ -36,9 +37,12 @@ AS
 	SET XACT_ABORT ON  
 	
 	BEGIN TRAN
-	
+	declare @shopDate Date;
 	INSERT INTO [dbo].[Delivery] ([Name], [dateOfIncoming], [Cost], [amount], [idOfShipper])
-	SELECT @Name, @dateOfIncoming, @Cost, @amount, @idOfShipper
+	SELECT @Name, @dateOfIncoming, @Cost, @amount, @idOfShipper;
+	select @shopDate=Shop.dateOfIncoming from Shop where Shop.Name=@Name;
+	if(@dateOfIncoming>@shopDate)
+	Update Shop set dateOfIncoming=@dateOfIncoming where Shop.Name=@Name;
 	
 	-- Begin Return Select <- do not remove
 	SELECT [id], [Name], [dateOfIncoming], [Cost], [amount], [idOfShipper]
@@ -48,6 +52,7 @@ AS
                
 	COMMIT
 GO
+
 IF OBJECT_ID('[dbo].[usp_DeliveryUpdate]') IS NOT NULL
 BEGIN 
     DROP PROC [dbo].[usp_DeliveryUpdate] 
@@ -396,12 +401,13 @@ AS
 
 	BEGIN TRAN
 
-	SELECT [id], [Category], [Name], [Cost], [onStorage], [dateOfIncoming], [hmOnStorage], [info] 
+	SELECT [id], [Category], [Name], [Cost], [dateOfIncoming], [info] 
 	FROM   [dbo].[Shop] 
 	WHERE  ([id] = @id OR @id IS NULL) 
 
 	COMMIT
 GO
+
 IF OBJECT_ID('[dbo].[usp_ShopInsert]') IS NOT NULL
 BEGIN 
     DROP PROC [dbo].[usp_ShopInsert] 
@@ -411,9 +417,7 @@ CREATE PROC [dbo].[usp_ShopInsert]
     @Category nvarchar(32),
     @Name nvarchar(32),
     @Cost money,
-    @onStorage nvarchar(3),
     @dateOfIncoming date,
-    @hmOnStorage int = NULL,
     @info nvarchar(100) = NULL
 AS 
 	SET NOCOUNT ON 
@@ -421,11 +425,41 @@ AS
 	
 	BEGIN TRAN
 	
-	INSERT INTO [dbo].[Shop] ([Category], [Name], [Cost], [onStorage], [dateOfIncoming], [hmOnStorage], [info])
-	SELECT @Category, @Name, @Cost, @onStorage, @dateOfIncoming, @hmOnStorage, @info
+	INSERT INTO [dbo].[Shop] ([Category], [Name], [Cost], [dateOfIncoming], [info])
+	SELECT @Category, @Name, @Cost, @dateOfIncoming, @info;
+	
+	exec [dbo].[usp_StorageInsert] @nameOfProduct=@Name, @hmOnStorage=0;
+	-- Begin Return Select <- do not remove
+	SELECT [id], [Category], [Name], [Cost], [dateOfIncoming], [info]
+	FROM   [dbo].[Shop]
+	WHERE  [id] = SCOPE_IDENTITY()
+	-- End Return Select <- do not remove
+               
+	COMMIT
+GO
+
+IF OBJECT_ID('[dbo].[usp_OnlyShopInsert]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[usp_OnlyShopInsert] 
+END 
+GO
+CREATE PROC [dbo].[usp_OnlyShopInsert] 
+    @Category nvarchar(32),
+    @Name nvarchar(32),
+    @Cost money,
+    @dateOfIncoming date,
+    @info nvarchar(100) = NULL
+AS 
+	SET NOCOUNT ON 
+	SET XACT_ABORT ON  
+	
+	BEGIN TRAN
+	
+	INSERT INTO [dbo].[Shop] ([Category], [Name], [Cost], [dateOfIncoming], [info])
+	SELECT @Category, @Name, @Cost, @dateOfIncoming, @info
 	
 	-- Begin Return Select <- do not remove
-	SELECT [id], [Category], [Name], [Cost], [onStorage], [dateOfIncoming], [hmOnStorage], [info]
+	SELECT [id], [Category], [Name], [Cost], [dateOfIncoming], [info]
 	FROM   [dbo].[Shop]
 	WHERE  [id] = SCOPE_IDENTITY()
 	-- End Return Select <- do not remove
@@ -442,9 +476,7 @@ CREATE PROC [dbo].[usp_ShopUpdate]
     @Category nvarchar(32),
     @Name nvarchar(32),
     @Cost money,
-    @onStorage nvarchar(3),
     @dateOfIncoming date,
-    @hmOnStorage int = NULL,
     @info nvarchar(100) = NULL
 AS 
 	SET NOCOUNT ON 
@@ -453,11 +485,11 @@ AS
 	BEGIN TRAN
 
 	UPDATE [dbo].[Shop]
-	SET    [Category] = @Category, [Name] = @Name, [Cost] = @Cost, [onStorage] = @onStorage, [dateOfIncoming] = @dateOfIncoming, [hmOnStorage] = @hmOnStorage, [info] = @info
+	SET    [Category] = @Category, [Name] = @Name, [Cost] = @Cost, [dateOfIncoming] = @dateOfIncoming, [info] = @info
 	WHERE  [id] = @id
 	
 	-- Begin Return Select <- do not remove
-	SELECT [id], [Category], [Name], [Cost], [onStorage], [dateOfIncoming], [hmOnStorage], [info]
+	SELECT [id], [Category], [Name], [Cost], [dateOfIncoming], [info]
 	FROM   [dbo].[Shop]
 	WHERE  [id] = @id	
 	-- End Return Select <- do not remove
@@ -486,6 +518,12 @@ GO
 ----------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------
 
+
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+USE [Course_work];
+GO
+
 IF OBJECT_ID('[dbo].[usp_UsersSelect]') IS NOT NULL
 BEGIN 
     DROP PROC [dbo].[usp_UsersSelect] 
@@ -499,7 +537,7 @@ AS
 
 	BEGIN TRAN
 
-	SELECT [id], [Login], [Password], [Balance], [isAdmin] 
+	SELECT [id], [Login], [Password], [idOfCards], [isAdmin] 
 	FROM   [dbo].[Users] 
 	WHERE  ([id] = @id OR @id IS NULL) 
 
@@ -513,7 +551,7 @@ GO
 CREATE PROC [dbo].[usp_UsersInsert] 
     @Login nvarchar(16),
     @Password nvarchar(16),
-    @Balance money = NULL,
+    @idOfCards int = NULL,
     @isAdmin int = NULL
 AS 
 	SET NOCOUNT ON 
@@ -521,11 +559,11 @@ AS
 	
 	BEGIN TRAN
 	
-	INSERT INTO [dbo].[Users] ([Login], [Password], [Balance], [isAdmin])
-	SELECT @Login, @Password, @Balance, @isAdmin
+	INSERT INTO [dbo].[Users] ([Login], [Password], [idOfCards], [isAdmin])
+	SELECT @Login, @Password, @idOfCards, @isAdmin
 	
 	-- Begin Return Select <- do not remove
-	SELECT [id], [Login], [Password], [Balance], [isAdmin]
+	SELECT [id], [Login], [Password], [idOfCards], [isAdmin]
 	FROM   [dbo].[Users]
 	WHERE  [id] = SCOPE_IDENTITY()
 	-- End Return Select <- do not remove
@@ -541,7 +579,7 @@ CREATE PROC [dbo].[usp_UsersUpdate]
     @id int,
     @Login nvarchar(16),
     @Password nvarchar(16),
-    @Balance money = NULL,
+    @idOfCards int = NULL,
     @isAdmin int = NULL
 AS 
 	SET NOCOUNT ON 
@@ -550,11 +588,11 @@ AS
 	BEGIN TRAN
 
 	UPDATE [dbo].[Users]
-	SET    [Login] = @Login, [Password] = @Password, [Balance] = @Balance, [isAdmin] = @isAdmin
+	SET    [Login] = @Login, [Password] = @Password, [idOfCards] = @idOfCards, [isAdmin] = @isAdmin
 	WHERE  [id] = @id
 	
 	-- Begin Return Select <- do not remove
-	SELECT [id], [Login], [Password], [Balance], [isAdmin]
+	SELECT [id], [Login], [Password], [idOfCards], [isAdmin]
 	FROM   [dbo].[Users]
 	WHERE  [id] = @id	
 	-- End Return Select <- do not remove
@@ -582,4 +620,100 @@ AS
 GO
 ----------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------
+USE [Course_work];
+GO
+
+IF OBJECT_ID('[dbo].[usp_StorageSelect]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[usp_StorageSelect] 
+END 
+GO
+CREATE PROC [dbo].[usp_StorageSelect] 
+    @id int
+AS 
+	SET NOCOUNT ON 
+	SET XACT_ABORT ON  
+
+	BEGIN TRAN
+
+	SELECT [id], [nameOfProduct], [hmOnStorage] 
+	FROM   [dbo].[Storage] 
+	WHERE  ([id] = @id OR @id IS NULL) 
+
+	COMMIT
+GO
+IF OBJECT_ID('[dbo].[usp_StorageInsert]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[usp_StorageInsert] 
+END 
+GO
+CREATE PROC [dbo].[usp_StorageInsert] 
+    @nameOfProduct nvarchar(32) = NULL,
+    @hmOnStorage int = NULL
+AS 
+	SET NOCOUNT ON 
+	SET XACT_ABORT ON  
+	
+	BEGIN TRAN
+	
+	INSERT INTO [dbo].[Storage] ([nameOfProduct], [hmOnStorage])
+	SELECT @nameOfProduct, @hmOnStorage
+	
+	-- Begin Return Select <- do not remove
+	SELECT [id], [nameOfProduct], [hmOnStorage]
+	FROM   [dbo].[Storage]
+	WHERE  [id] = SCOPE_IDENTITY()
+	-- End Return Select <- do not remove
+               
+	COMMIT
+GO
+IF OBJECT_ID('[dbo].[usp_StorageUpdate]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[usp_StorageUpdate] 
+END 
+GO
+CREATE PROC [dbo].[usp_StorageUpdate] 
+    @id int,
+    @nameOfProduct nvarchar(32) = NULL,
+    @hmOnStorage int = NULL
+AS 
+	SET NOCOUNT ON 
+	SET XACT_ABORT ON  
+	
+	BEGIN TRAN
+
+	UPDATE [dbo].[Storage]
+	SET    [nameOfProduct] = @nameOfProduct, [hmOnStorage] = @hmOnStorage
+	WHERE  [id] = @id
+	
+	-- Begin Return Select <- do not remove
+	SELECT [id], [nameOfProduct], [hmOnStorage]
+	FROM   [dbo].[Storage]
+	WHERE  [id] = @id	
+	-- End Return Select <- do not remove
+
+	COMMIT
+GO
+IF OBJECT_ID('[dbo].[usp_StorageDelete]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[usp_StorageDelete] 
+END 
+GO
+CREATE PROC [dbo].[usp_StorageDelete] 
+    @id int
+AS 
+	SET NOCOUNT ON 
+	SET XACT_ABORT ON  
+	
+	BEGIN TRAN
+
+	DELETE
+	FROM   [dbo].[Storage]
+	WHERE  [id] = @id
+
+	COMMIT
+GO
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+
 
