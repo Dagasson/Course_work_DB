@@ -53,3 +53,8 @@ create table Storage--склад
 nameOfProduct nvarchar(32) unique, --наименование товара
 hmOnStorage int default 0 --количество на складе
 );
+create table Discount--скидки
+(id int identity(1,1) primary key,--идентификатор
+dateOfDiscount date unique not null, --дата скидки
+percents real not null--коэффицент
+);

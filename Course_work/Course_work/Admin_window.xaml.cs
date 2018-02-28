@@ -46,7 +46,6 @@ namespace Course_work
                 SqlCommand command = new SqlCommand("usp_ShipperInsert", connection);//указываем какую команду вызываем
                 command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
                 connection.Open();//открываем соединение
-                                  //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
                                   //добавляем параметр в вызываемую процедуру
                 command.Parameters.AddWithValue("@Name", ShipName);
                 command.Parameters.AddWithValue("@numberOfCards", numOfCard);
@@ -67,7 +66,6 @@ namespace Course_work
             SqlCommand command = new SqlCommand("usp_ShipperSelectAll", connection);//указываем какую команду вызываем
             command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
             connection.Open();//открываем соединение
-                              //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
                               //добавляем параметр в вызываемую процедуру
                               //command.Parameters.AddWithValue("@Login", Login);
                               //Не добавляем.
@@ -98,7 +96,6 @@ namespace Course_work
                 SqlCommand command = new SqlCommand("usp_ShipperDelete", connection);//указываем какую команду вызываем
                 command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
                 connection.Open();//открываем соединение
-                                  //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
                                   //добавляем параметр в вызываемую процедуру
                 command.Parameters.AddWithValue("@id", idOfShipper);
 
@@ -121,7 +118,6 @@ namespace Course_work
                 SqlCommand command = new SqlCommand("usp_UsersIsAdminUpdate", connection);//указываем какую команду вызываем
                 command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
                 connection.Open();//открываем соединение
-                                  //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
                                   //добавляем параметр в вызываемую процедуру
                 command.Parameters.AddWithValue("@id", idOfUs);
                 command.Parameters.AddWithValue("@isAdmin", 2);
@@ -145,7 +141,6 @@ namespace Course_work
                 SqlCommand command = new SqlCommand("usp_UsersIsAdminUpdate", connection);//указываем какую команду вызываем
                 command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
                 connection.Open();//открываем соединение
-                                  //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
                                   //добавляем параметр в вызываемую процедуру
                 command.Parameters.AddWithValue("@id", idOfUs);
                 command.Parameters.AddWithValue("@isAdmin", 1);
@@ -166,7 +161,6 @@ namespace Course_work
             SqlCommand command = new SqlCommand("usp_UsersSelectAll", connection);//указываем какую команду вызываем
             command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
             connection.Open();//открываем соединение
-                              //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
                               //добавляем параметр в вызываемую процедуру
                               //command.Parameters.AddWithValue("@Login", Login);
                               //Не добавляем.
@@ -206,7 +200,6 @@ namespace Course_work
                     SqlCommand command = new SqlCommand("usp_DeliveryInsert", connection);//указываем какую команду вызываем
                     command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
                     connection.Open();//открываем соединение
-                                      //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
                                       //добавляем параметр в вызываемую процедуру
                     command.Parameters.AddWithValue("@Name", Name);
                     command.Parameters.AddWithValue("@dateOfIncoming", dateOfDelivery);
@@ -235,7 +228,6 @@ namespace Course_work
             SqlCommand command = new SqlCommand("usp_DeliverySelectAll", connection);//указываем какую команду вызываем
             command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
             connection.Open();//открываем соединение
-                              //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
                               //добавляем параметр в вызываемую процедуру
                               //command.Parameters.AddWithValue("@Login", Login);
                               //Не добавляем.
@@ -274,7 +266,6 @@ namespace Course_work
                     SqlCommand command = new SqlCommand("usp_ShopInsert", connection);//указываем какую команду вызываем
                     command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
                     connection.Open();//открываем соединение
-                                      //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
                                       //добавляем параметр в вызываемую процедуру
                     command.Parameters.AddWithValue("@Category", Category);
                     command.Parameters.AddWithValue("@Name", Name);
@@ -302,8 +293,7 @@ namespace Course_work
             SqlCommand command = new SqlCommand("usp_ShopSelectAll", connection);//указываем какую команду вызываем
             command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
             connection.Open();//открываем соединение
-                              //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
-                              //добавляем параметр в вызываемую процедуру
+                            //добавляем параметр в вызываемую процедуру
                               //command.Parameters.AddWithValue("@Login", Login);
                               //Не добавляем.
 
@@ -359,8 +349,7 @@ namespace Course_work
                     SqlCommand command = new SqlCommand("usp_OnlyShopInsert", connection);//указываем какую команду вызываем
                     command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
                     connection.Open();//открываем соединение
-                                      //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
-                                      //добавляем параметр в вызываемую процедуру
+                                      //MessageBox.Show("Соединение установлено");\
                     command.Parameters.AddWithValue("@Category", "cat"+i);
                     command.Parameters.AddWithValue("@Name", "Name"+i);
                     command.Parameters.AddWithValue("@Cost", i*2);

@@ -44,7 +44,7 @@ namespace Course_work
                 string Password = password.Text;
                 //q1 = new String(login.Text.Where(c => Char.IsDigit(c)).ToArray());//хуитка для проверки число ли введено, тут не нужно
 
-                // SqlConnectionStringBuilder ConnectionString = new SqlConnectionStringBuilder();//данные о подключении, или гайд, как подключиться к БД, если ты безрукая хуйня.
+                // SqlConnectionStringBuilder ConnectionString = new SqlConnectionStringBuilder();//данные о подключении, или гайд, как подключиться к БД, если ты безрукая фигня(это я).
                 //ConnectionString.DataSource = @"ASHENVALE";
                 //ConnectionString.InitialCatalog = "Course_work";
                 //ConnectionString.IntegratedSecurity = true;
@@ -56,7 +56,6 @@ namespace Course_work
                 SqlCommand command = new SqlCommand("usp_UserSelectByLogin", connection);//указываем какую команду вызываем
                 command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
                 connection.Open();//открываем соединение
-                                  //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
                                   //добавляем параметр в вызываемую процедуру
                 command.Parameters.AddWithValue("@Login", Login);
                 command.Parameters.AddWithValue("@Password", Password);

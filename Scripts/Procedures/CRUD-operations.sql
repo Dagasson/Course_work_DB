@@ -1,5 +1,97 @@
 USE [Course_work];
 GO
+IF OBJECT_ID('[dbo].[usp_DiscountSelect]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[usp_DiscountSelect] 
+END 
+GO
+CREATE PROC [dbo].[usp_DiscountSelect] 
+    @id int
+AS 
+	SET NOCOUNT ON 
+	SET XACT_ABORT ON  
+
+	BEGIN TRAN
+
+	SELECT [id], [dateOfDiscount], [percents] 
+	FROM   [dbo].[Discount] 
+	WHERE  ([id] = @id OR @id IS NULL) 
+
+	COMMIT
+GO
+IF OBJECT_ID('[dbo].[usp_DiscountInsert]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[usp_DiscountInsert] 
+END 
+GO
+CREATE PROC [dbo].[usp_DiscountInsert] 
+    @dateOfDiscount date,
+    @percents real
+AS 
+	SET NOCOUNT ON 
+	SET XACT_ABORT ON  
+	
+	BEGIN TRAN
+	
+	INSERT INTO [dbo].[Discount] ([dateOfDiscount], [percents])
+	SELECT @dateOfDiscount, @percents
+	
+	-- Begin Return Select <- do not remove
+	SELECT [id], [dateOfDiscount], [percents]
+	FROM   [dbo].[Discount]
+	WHERE  [id] = SCOPE_IDENTITY()
+	-- End Return Select <- do not remove
+               
+	COMMIT
+GO
+IF OBJECT_ID('[dbo].[usp_DiscountUpdate]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[usp_DiscountUpdate] 
+END 
+GO
+CREATE PROC [dbo].[usp_DiscountUpdate] 
+    @id int,
+    @dateOfDiscount date,
+    @percents real
+AS 
+	SET NOCOUNT ON 
+	SET XACT_ABORT ON  
+	
+	BEGIN TRAN
+
+	UPDATE [dbo].[Discount]
+	SET    [dateOfDiscount] = @dateOfDiscount, [percents] = @percents
+	WHERE  [id] = @id
+	
+	-- Begin Return Select <- do not remove
+	SELECT [id], [dateOfDiscount], [percents]
+	FROM   [dbo].[Discount]
+	WHERE  [id] = @id	
+	-- End Return Select <- do not remove
+
+	COMMIT
+GO
+IF OBJECT_ID('[dbo].[usp_DiscountDelete]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[usp_DiscountDelete] 
+END 
+GO
+CREATE PROC [dbo].[usp_DiscountDelete] 
+    @id int
+AS 
+	SET NOCOUNT ON 
+	SET XACT_ABORT ON  
+	
+	BEGIN TRAN
+
+	DELETE
+	FROM   [dbo].[Discount]
+	WHERE  [id] = @id
+
+	COMMIT
+GO
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 
 IF OBJECT_ID('[dbo].[usp_DeliverySelect]') IS NOT NULL
 BEGIN 

@@ -42,7 +42,6 @@ namespace Course_work
             SqlCommand command = new SqlCommand("usp_ShopSelectAll", connection);//указываем какую команду вызываем
             command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
             connection.Open();//открываем соединение
-                              //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
                               //добавляем параметр в вызываемую процедуру
                               //command.Parameters.AddWithValue("@Login", Login);
                               //Не добавляем.
@@ -77,7 +76,6 @@ namespace Course_work
                 SqlCommand command = new SqlCommand("usp_SelectCurrentOrders", connection);//указываем какую команду вызываем
                 command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
                 connection.Open();//открываем соединение
-                                  //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
                                   //добавляем параметр в вызываемую процедуру
                 command.Parameters.AddWithValue("@idOfUser", User_Model.id);
 
@@ -105,7 +103,6 @@ namespace Course_work
                 SqlCommand command = new SqlCommand("usp_SelectUsersOrders", connection);//указываем какую команду вызываем
                 command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
                 connection.Open();//открываем соединение
-                                  //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
                                   //добавляем параметр в вызываемую процедуру
                 command.Parameters.AddWithValue("@idOfUser", User_Model.id);
 
@@ -136,7 +133,7 @@ namespace Course_work
             cor.Show();
         }
 
-        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)//Эта хрень важна, я без нее минут 40 ебался, пока не понял её значимость.
+        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

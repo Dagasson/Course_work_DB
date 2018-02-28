@@ -35,7 +35,6 @@ namespace Course_work
                 SqlCommand command = new SqlCommand("usp_OrdersInsert", connection);//указываем какую команду вызываем
                 command.CommandType = System.Data.CommandType.StoredProcedure;// указываем, что команда представляет хранимую процедуру
                 connection.Open();//открываем соединение
-                                  //MessageBox.Show("Соединение установлено");//хуитка-костыль для тупых, что соединение установлено
                                   //добавляем параметр в вызываемую процедуру
                 command.Parameters.AddWithValue("@idOfUser", User_Model.id);
                 command.Parameters.AddWithValue("@Summ", 0);
